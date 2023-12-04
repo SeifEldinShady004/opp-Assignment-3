@@ -1,52 +1,47 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <set>
-#include <cmath>
-
+#include <bits/stdc++.h>
+using namespace std;
 class StringSet {
 private:
-    std::set<std::string> words;
+    set<string> words;
 
 public:
     // Constructor from file
-    StringSet(std::ifstream& file) {
+    StringSet(ifstream& file) {
         loadFromFile(file);
     }
 
     // Constructor from string
-    StringSet(const std::string& text) {
+    StringSet(const string& text) {
         loadFromString(text);
     }
 
     // Load words from file
-    void loadFromFile(std::ifstream& file) {
+    void loadFromFile(ifstream& file) {
 
         if (file.is_open()) {
-            std::string line;
-            while (std::getline(file, line)) {
+            string line;
+            while (getline(file, line)) {
                 processLine(line);
             }
         }
     }
 
     // Load words from string
-    void loadFromString(const std::string& text) {
-        std::istringstream iss(text);
-        std::string word;
+    void loadFromString(const string& text) {
+        istringstream iss(text);
+        string word;
         while (iss >> word) {
             processWord(word);
         }
     }
 
     // Add a word to the set
-    void addWord(const std::string& word) {
+    void addWord(const string& word) {
         processWord(word);
     }
 
     // Remove a word from the set
-    void removeWord(const std::string& word) {
+    void removeWord(const string& word) {
         words.erase(word);
     }
 
@@ -63,9 +58,9 @@ public:
     // Output all strings in the set
     void printSet() const {
         for (const auto& word : words) {
-            std::cout << word << " ";
+            cout << word << " ";
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 
     // Overload + operator to return the union of two StringSet objects
@@ -77,7 +72,7 @@ public:
 
     // Overload * operator to return the intersection of two StringSet objects
     StringSet operator*(StringSet& other) {
-        std::string result;
+        string result;
         for (const auto& word : words) {
             if (other.words.count(word) > 0) {
                 result+=word+' ';
@@ -98,28 +93,28 @@ public:
         }
 
         double similarity = static_cast<double>(intersectionSize) /
-                            (std::sqrt(static_cast<double>(setSize)) * std::sqrt(static_cast<double>(otherSize)));
+                            (sqrt(static_cast<double>(setSize)) * sqrt(static_cast<double>(otherSize)));
 
         return similarity;
     }
 
 private:
     // Helper function to process a line of text
-    void processLine(const std::string& line) {
-        std::istringstream iss(line);
-        std::string word;
+    void processLine(const string& line) {
+        istringstream iss(line);
+        string word;
         while (iss >> word) {
             processWord(word);
         }
     }
 
     // Helper function to process a word
-    void processWord(const std::string& word) {
+    void processWord(const string& word) {
         // Convert to lowercase and remove punctuation
-        std::string processedWord;
+        string processedWord;
         for (char ch : word) {
-            if (std::isalpha(ch)) {
-                processedWord += std::tolower(ch);
+            if (isalpha(ch)) {
+                processedWord += tolower(ch);
             }
         }
         if (!processedWord.empty()) {
@@ -130,26 +125,26 @@ private:
 
 int main() {
 
-    std::ifstream file(R"(C:\Users\Seif Eldin\OneDrive\Desktop\FCAI\oop\opppp\text.txt)");
+    ifstream file(R"(C:\Users\Seif Eldin\OneDrive\Desktop\FCAI\oop\opppp\text.txt)");
     // Test the class and functions
     StringSet set1("This is a sample document.");
     StringSet set2(file);
 
-    std::cout << "Set 1: ";
+    cout << "Set 1: ";
     set1.printSet();
-    std::cout << "Set 2: ";
+    cout << "Set 2: ";
     set2.printSet();
 
     StringSet unionSet = set1 + set2;
-    std::cout << "Union Set: ";
+    cout << "Union Set: ";
     unionSet.printSet();
 
     StringSet intersectionSet = set1 * set2;
-    std::cout << "Intersection Set: ";
+    cout << "Intersection Set: ";
     intersectionSet.printSet();
 
     double similarity = set1.computeSimilarity(set2);
-    std::cout << "Similarity between Set 1 and Set 2: " << similarity << std::endl;
+    cout << "Similarity between Set 1 and Set 2: " << similarity << endl;
 
     return 0;
 }
