@@ -89,4 +89,12 @@ int main()
     Universe gameOfLife(5, 5);
     gameOfLife.initialize();
     gameOfLife.run(2);
+
+    Universe round_two(7, 7);
+    round_two.initialize();
+    round_two.run(3);
+
+    Universe one_more(9, 9);
+    one_more.initialize();
+    one_more.run(3);
 }
