@@ -1,3 +1,9 @@
+// File name:A3_SheetPb2_20220160.cpp
+// Purpose:do to string to reed hoe much words and letter are the same and calilate by a equation
+// Author(s): maya ahmed        
+// ID(s):20220160
+// Section:s18
+// Date:8/12/2023
 #include <bits/stdc++.h>
 using namespace std;
 class StringSet {
